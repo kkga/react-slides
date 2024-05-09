@@ -21,12 +21,24 @@ body {
   @apply h-screen overflow-hidden relative;
 }
 
+.deck.overview {
+  @apply flex flex-wrap ~gap-8/12 ~p-8/12 bg-slate-100 overflow-scroll;
+}
+
+.deck.deck.overview > .slide {
+  @apply bg-white ring-neutral-300 ring-2 h-auto basis-[320px] flex-1 flex gap-4 p-4;
+
+  &[data-current='true'] {
+    @apply ring-orange-500 ring-4;
+  }
+}
+
 .slide {
-  @apply @container text-slate-500 font-[450] h-screen;
-  @apply flex-col *:~gap-8/16 ~gap-8/16 ~p-8/16 text-balance hidden data-[current=true]:flex;
+  @apply @container text-slate-500 font-[450] h-screen overflow-hidden;
+  @apply flex-col ~gap-8/16 ~p-8/16 text-balance hidden data-[current=true]:flex;
 
   > .grid {
-    @apply ~gap-8/16;
+    @apply ~@:~gap-4/16;
   }
 
   :is(h1, h2, h3, h4, h5, h6) {
@@ -35,20 +47,20 @@ body {
   }
 
   h1 {
-    @apply ~text-3xl/8xl m-auto text-center;
+    @apply ~@:~text-3xl/8xl m-auto text-center;
     font-variation-settings: 'INFM' 100, 'BNCE' 20, 'SPAC' 0;
   }
 
   h2 {
-    @apply ~text-2xl/6xl m-auto;
+    @apply ~@:~text-2xl/6xl m-auto;
   }
 
   h3 {
-    @apply ~text-3xl/6xl;
+    @apply ~@:~text-xl/6xl;
   }
 
   h4 {
-    @apply text-2xl;
+    @apply ~@:~text-lg/4xl;
   }
 
   ul {
@@ -57,11 +69,11 @@ body {
 
   li,
   p {
-    @apply ~text-lg/4xl !leading-normal;
+    @apply ~@:~text-sm/4xl !leading-normal;
   }
 
   li {
-    @apply ~mb-4/12;
+    @apply ~@:~mb-4/12;
   }
 
   p:has(img) {
@@ -69,7 +81,7 @@ body {
   }
 
   img {
-    @apply max-h-[65vh] object-contain;
+    @apply max-h-[80%] object-contain;
   }
 
   strong {
@@ -77,7 +89,12 @@ body {
   }
 
   pre {
-    @apply ~text-lg/2xl p-0 bg-transparent text-left overflow-scroll;
+    @apply ~@:~text-xs/2xl p-0 bg-transparent text-left overflow-scroll;
+  }
+
+  code {
+    font-family: 'Rec Mono Casual';
+    font-weight: bold;
   }
 
   [data-highlighted-line] {
@@ -87,27 +104,22 @@ body {
   mark {
     @apply bg-transparent underline underline-offset-4 decoration-orange-400 decoration-dashed;
   }
-
-  code {
-    font-family: 'Rec Mono Casual';
-    font-weight: bold;
-  }
 }
 
 /* ---------- */
 
 .slide .demo {
-  @apply p-8 rounded-xl border-4 flex flex-col gap-4 items-start;
+  @apply ~@:~p-4/8 rounded-xl border-4 flex flex-col ~@:~gap-2/4 items-start;
   h1 {
-    @apply text-5xl text-current font-medium tracking-normal m-0;
+    @apply ~@:~text-xl/5xl text-current font-medium tracking-normal m-0;
   }
   ul {
     @apply list-disc list-inside my-0;
   }
   li {
-    @apply my-2 text-2xl;
+    @apply my-2 ~@:~text-sm/2xl;
   }
   button {
-    @apply bg-sky-500 active:bg-sky-600 text-white text-2xl font-medium py-2 px-4 rounded-lg;
+    @apply bg-sky-500 active:bg-sky-600 text-white ~@:~text-lg/2xl font-medium ~@:~py-1/2 ~@:~px-2/4 rounded-lg;
   }
 }
