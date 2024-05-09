@@ -1,20 +1,35 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
+import fluid, {
+  extract,
+  screens,
+  fontSize,
+} from 'fluid-tailwind'
 
 const config: Config = {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
-  theme: {
-    extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
-    },
+  content: {
+    files: [
+      './pages/**/*.{js,ts,jsx,tsx,mdx}',
+      './components/**/*.{js,ts,jsx,tsx,mdx}',
+      './app/**/*.{js,ts,jsx,tsx,mdx}',
+    ],
+    extract,
   },
-  plugins: [],
-};
-export default config;
+  theme: {
+    screens,
+    fontSize,
+    /** @type {import('fluid-tailwind').FluidThemeConfig} */
+    // fluid: ({ theme }) => ({
+    //   defaultScreens: ['20rem', theme('screens.lg')],
+    // }),
+  },
+  corePlugins: {
+    // fontSize: false,
+  },
+  plugins: [
+    require('@tailwindcss/container-queries'),
+    fluid({
+      checkSC144: false, // default: true
+    }),
+  ],
+}
+export default config

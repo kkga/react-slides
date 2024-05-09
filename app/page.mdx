@@ -1,0 +1,419 @@
+import {
+  LikeButton1,
+  LikeButton2,
+  LikeButton3,
+} from '@/app/components/demos'
+
+# Describing UI
+
+---
+
+### Pain points in UI development
+
+- **Complexity**: Managing state, updates, and UI interactions.
+- **Consistency**: Ensuring a consistent look and behavior.
+- **Performance**: Rendering and updating UI efficiently.
+
+---
+
+### The DOM: a browser's view of a web page
+
+<div className="grid grid-cols-2">
+
+```html
+<html>
+  <body>
+    <div>
+      <h1>Team</h1>
+      <ul>
+        <li>A. Lovelace</li>
+        <li>G. Hopper</li>
+        <li>M. Hamilton</li>
+      </ul>
+      <button>Like (0)</button>
+    </div>
+  </body>
+</html
+```
+
+<img
+  src="/dom2.png"
+  className="h-full aspect-auto max-h-[50vh]"
+/>
+
+</div>
+
+---
+
+### The DOM: a browser's view of a web page
+
+<div className="grid grid-cols-2">
+
+<img
+  src="/dom2.png"
+  className="h-full aspect-auto max-h-[50vh]"
+/>
+
+<div className="demo">
+  <h1>Team</h1>
+  <ul>
+    <li>A. Lovelace</li>
+    <li>G. Hopper</li>
+    <li>M. Hamilton</li>
+  </ul>
+  <button>Like (0)</button>
+</div>
+
+</div>
+
+---
+
+# The two paradigms
+
+---
+
+### Imperative
+
+<div className="grid grid-cols-2">
+<div>
+
+- Specifies _how_ to do tasks
+- Directly manipulate the DOM with steps/instructions
+- Low-level, detailed, and error-prone
+
+</div>
+
+![](/imperative.png)
+
+</div>
+
+---
+
+### Imperative
+
+Adding a new item in vanilla JS...
+
+```javascript
+// get the list
+const list = document.getElementById('list')
+
+// create a new item
+const item = document.createElement('li')
+
+// set the item's text
+item.textContent = 'A. Turing'
+
+// add the item to the list
+list.appendChild(item)
+```
+
+---
+
+### Imperative
+
+Why is it bad?
+
+- **Tight coupling**: Code is tightly bound to the DOM.
+- **Brittle**: Changes in the DOM structure break the code.
+- **Hard to maintain**: Hard to understand and debug.
+- **Performance**: Manual updates are often slow and
+  inefficient.
+
+---
+
+### Declarative
+
+<div className="grid grid-cols-2">
+<div>
+
+- Specifies _what_ to achieve
+- Describe the desired outcome, not the steps
+- High-level, concise, easier to understand and maintain
+
+</div>
+
+![](/declarative.png)
+
+</div>
+
+---
+
+### Declarative
+
+Describing the list to React...
+
+```jsx
+function TeamList() {
+  // let members be a list of names
+  let members = ['A. Lovelace', 'G. Hopper', 'M. Hamilton']
+
+  return (
+    // render a list...
+    <ul>
+      {members.map((member) => (
+        <li>{member}</li> // ...with each member
+      ))}
+    </ul>
+  )
+}
+```
+
+---
+
+### Declarative
+
+Why is it good?
+
+- **Loose coupling**: Code is independent of the DOM.
+- **Resilient**: Changes in the DOM structure are handled
+  automatically.
+- **Easy to reason about**: Describes the desired outcome
+  clearly.
+- **Performance**: React handles updates efficiently.
+
+---
+
+### React: A declarative way to build UI
+
+<div className="grid grid-cols-2">
+
+- Designed by Jordan Walke at Facebook.
+- First used to build parts of Facebook's news feed in 2011.
+- Subsequently used to build Instagram web in 2012.
+- Open-sourced in 2013.
+
+<img src="/jordan.png" />
+
+</div>
+
+---
+
+# Rethinking the separation of concerns
+
+---
+
+### Status quo until ~2013
+
+<div className="grid grid-cols-[1fr_1fr] grid-flow-row">
+
+**HTML**: Structure and content.
+
+```html
+<!-- index.html -->
+<form id="login-form">
+  <input id="username" />
+  <input id="password" />
+  <button>Login</button>
+</form>
+```
+
+**JavaScript**: Behavior and interactivity.
+
+```javascript
+// login.js
+isLoggedIn() {...}
+handleLogin() {...}
+handleLogout() {...}
+```
+
+**CSS**: Presentation and styling.
+
+```css
+/* global.css */
+button {
+  background-color: blue;
+  color: white;
+}
+```
+
+</div>
+
+---
+
+### Components and JSX
+
+<div className="grid grid-cols-[1fr_1fr] grid-flow-row">
+
+**Components**: Structure, content, behavior and styling in one
+place.<br/><br/> And soon the server-side logic...
+
+```jsx
+// LoginForm.jsx
+function LoginForm({isLoggedIn}) {
+  handleLogin() {...}
+  handleLogout() {...}
+
+  return (
+    <form>
+      <input id="username" />
+      <input id="password" />
+
+      {isLoggedIn
+        ? <button>Logout</button>
+        : <button>Login</button>
+      }
+    </form>
+  )
+}
+```
+
+</div>
+
+---
+
+### Components
+
+- **Ergonomic**: Encapsulate structure, behavior, and styling.
+- **Reusable**: Composable and shareable.
+- **Maintainable**: Easier to understand and debug.
+
+---
+
+### JSX
+
+- **JSX**: JavaScript in HTML.
+- **Approachable**: Familiar syntax, easy to learn.
+- **Initially Controversial**: Mixed concerns, now a strength.
+- **Widely Accepted**: For readability and component
+  composition.
+
+---
+
+React creates and manages a virtual tree of your components and
+renders it to the DOM.
+
+<img src="/react-tree.png" className="m-auto" />
+
+---
+
+# UI = f(state)
+
+---
+
+### What is state?
+
+State is what makes the UI dynamic and interactive.
+
+Every UI has many levels of state, which are snapshots of some
+data at a particular moment.
+
+Anything from a simple counter to a complex user profile.
+
+---
+
+### Levels of state
+
+<div className="grid grid-cols-4 m-auto">
+
+**Global**<br/> <small>user auth, session, settings,
+etc.</small>
+
+**Local**<br/> <small>form inputs, toggles, counters,
+etc.</small>
+
+**Derived**<br/> <small>filtered list, computed value,
+etc.</small>
+
+**UI**<br/> <small>visibility, focus, hover, etc.</small>
+
+**Localization**<br/> <small>language, timezone, etc.</small>
+
+**Device**<br/> <small>network, viewport, input mode,
+etc.</small>
+
+**Browser**<br/> <small>theme and motion preferences, features,
+etc.</small>
+
+**User**<br/> <small>disability, impairment, etc.</small>
+
+</div>
+
+---
+
+For React, state is like a snapshot of data at a particular
+moment.
+
+<div className="grid grid-cols-3 m-auto">
+
+<img className="w-80 mx-8" src="/state-1.png" />
+<img className="w-80 mx-8" src="/state-2.png" />
+<img className="w-80 mx-8" src="/state-3.png" />
+
+</div>
+
+---
+
+<div className="demo">
+  <LikeButton1 />
+</div>
+
+{/* prettier-ignore */}
+```jsx
+function LikeButton() {
+  return (
+    <button>
+      I don't do anything yet
+    </button>
+  )
+}
+```
+
+---
+
+<div className="demo">
+  <LikeButton2 />
+</div>
+
+{/* prettier-ignore */}
+```jsx {3} /handleClick/
+function LikeButton() {
+
+  let handleClick = () => alert('Like button clicked!')
+
+  return (
+    <button onClick={handleClick}>
+      Like
+    </button>
+  )
+}
+```
+
+---
+
+<div className="demo">
+  <LikeButton3 />
+</div>
+
+{/* prettier-ignore */}
+```jsx {2} 
+function LikeButton() {
+  let [likes, setLikes] = useState(0)
+  let handleClick = () => alert('Like button clicked!')
+
+  return (
+    <button onClick={handleClick}>
+      {likes} {likes === 1 ? 'like' : 'likes'}
+    </button>
+  )
+}
+```
+
+---
+
+<div className="demo">
+  <LikeButton3 />
+</div>
+
+{/* prettier-ignore */}
+```jsx {3}
+function LikeButton() {
+  let [likes, setLikes] = useState(0)
+  let handleClick = () => setLikes((l) => l + 1)
+
+  return (
+    <button onClick={handleClick}>
+      {likes} {likes === 1 ? 'like' : 'likes'}
+    </button>
+  )
+}
+```

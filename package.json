@@ -9,19 +9,41 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.3"
+    "@mdx-js/loader": "^3.0.1",
+    "@mdx-js/mdx": "^3.0.1",
+    "@mdx-js/react": "^3.0.1",
+    "@next/mdx": "^14.2.3",
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@types/hast": "^3.0.4",
+    "@types/mdx": "^2.0.13",
+    "@types/unist": "^3.0.2",
+    "hastscript": "^9.0.0",
+    "next": "14.2.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "rehype-pretty-code": "^0.13.1",
+    "shiki": "^1.4.0",
+    "tailwindcss-fluid-type": "^2.0.6",
+    "unist-builder": "^4.0.0",
+    "unist-util-visit": "^5.0.0",
+    "unist-util-visit-parents": "^6.0.1"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.3"
+    "@types/node": "^20.12.11",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.3",
+    "fluid-tailwind": "^0.2.0",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "printWidth": 64,
+    "proseWrap": "always"
   },
   "packageManager": "pnpm@8.15.7+sha256.50783dd0fa303852de2dd1557cd4b9f07cb5b018154a6e76d0f40635d6cee019"
 }
