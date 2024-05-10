@@ -92,11 +92,6 @@ body {
     @apply ~@:~text-xs/2xl p-0 bg-transparent text-left overflow-scroll;
   }
 
-  code {
-    font-family: 'Rec Mono Casual';
-    font-weight: bold;
-  }
-
   [data-highlighted-line] {
     @apply bg-orange-100;
   }

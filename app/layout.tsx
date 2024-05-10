@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Martian_Mono, Shantell_Sans } from 'next/font/google'
+import { Shantell_Sans } from 'next/font/google'
 import { Deck } from './deck'
 import './globals.css'
 
@@ -7,12 +7,6 @@ const font = Shantell_Sans({
   subsets: ['latin'],
   variable: '--font-sans',
   axes: ['INFM', 'BNCE', 'SPAC'],
-})
-
-const fontMono = Martian_Mono({
-  subsets: ['latin'],
-  axes: ['wdth'],
-  variable: '--font-mono',
 })
 
 export const metadata: Metadata = {
@@ -27,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${font.variable} ${fontMono.variable}`}>
+      <body className={`${font.variable} `}>
         <Deck>{children}</Deck>
       </body>
     </html>
